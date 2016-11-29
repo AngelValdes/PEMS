@@ -1,7 +1,8 @@
+require('dotenv').config();
 const express = require("express");
 const jwt = require("jsonwebtoken");
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.ENV_PORT || 5000;
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true}));

@@ -1,5 +1,6 @@
 module.exports = (express, jwt)=>{
   const router = express.Router();
+  const secret = process.env.AUTH_SUPERSECRET || "supersecret";
   router.get("/api", (req, res)=>{
       res.status(200).json({WebServiceStatus: "healthy"});
   });
@@ -8,7 +9,7 @@ module.exports = (express, jwt)=>{
     var password = req.body.password;
     //authenticate user
     if((username==="student1" || username==="student2") && password==="123"){
-      var token = jwt.sign({username:username}, "supersecret", {expiresIn: 360});
+      var token = jwt.sign({username:username}, secret, {expiresIn: 360});
       res.send(token);
     }else{
       res.redirect("#/login");
@@ -42,7 +43,7 @@ module.exports = (express, jwt)=>{
       }
     ];
     var token = req.query.token;
-    jwt.verify(token, "supersecret", (err, decoded) => {
+    jwt.verify(token, secret, (err, decoded) => {
       if (!err) {
         res.status(200).json(students);
       } else {
