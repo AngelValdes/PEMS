@@ -1,0 +1,35 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <img class="navbar-brand" src="/contents/logoTitle.png" alt="Public Education Management System Logo">
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li class="active"><a href="#/"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a></li>
+        <li><a href="#portal">Portal</a></li>
+        <li><a href="#aboutus">About Us</a></li>
+        <li><a href="#jobs">Jobs</a></li>
+        <li><a href=""><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a></li>
+      </ul>
+    </div><!--/.navbar-collapse -->
+  </div>
+</nav>
+    <script>
+        $("li")
+            /*.mouseover(function() {
+                $(this).animate({ fontSize: "16pt" }, 300);
+            })
+            .mouseout(function() {
+                $(this).animate({ fontSize: "11pt" }, 100);
+            })*/
+            .click(function() {
+                $("li").attr("class", "");
+                $(this).attr("class", "active");
+            });
+    </script>

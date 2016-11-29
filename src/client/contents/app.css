@@ -1,0 +1,122 @@
+/* common start */
+body {
+  padding-top: 50px; /* Move down content, fixed navbar is 50px  */
+}
+.navbar-brand{
+  padding: 5px;
+}
+.navbar-brand>img {
+  padding: 0px;
+}
+.glyphicon-home{
+  font-size: 16px;
+}
+.alerts{
+  background-color:orange; 
+}
+.alerts, .events{
+  padding: 5px;
+}
+.alerts h4, .events h4{
+  padding: 0px;
+  margin: 0px;
+  text-align: center;
+}
+.alerts h4{
+  color: #fff; /* red=dangerous, blue=information */
+  font-weight: 300;
+  font-size: 16px;
+}
+footer{
+  background-color: black;
+  min-height: 90px;
+}
+footer li a{
+  color: #029ccf;
+}
+footer li:before {
+  content:"\e165";
+  color: #029ccf;
+}
+footer .linksGroup{
+ padding-top:10px;
+}
+footer .row div{
+  border: 1px solid #029ccf;
+}
+.copyright{
+  height: 20px;
+  font-size: 10px;
+  color: gray;
+  text-align: center;
+  padding: 5px;
+}
+/* common end */
+
+/* home start */
+.events{
+  background-color:#029ccf; 
+}
+.events h4{
+  color: #fff;
+  font-size: 14px; 
+}
+.resourceInner{
+  padding:10px;
+  background-color: black;
+  color: #fff;
+  border-radius: 10px;
+}
+.resourceSeparator{
+  min-height:10px;
+}
+.resourceInner li,  footer li{
+  display: block;
+}
+.resourceInner li a{
+  color: white;
+}
+.resourceInner li:before {
+  content:"\e165";
+  color: #CCCCCC;
+}
+.resourceInner li:before, footer li:before {    
+  font-family: 'Glyphicons Halflings';
+  font-size: 9px;
+  float: left;
+  margin-top: 4px;
+  margin-left: -17px;  
+}
+/* home end */
+
+/* portal start */
+.portalContent{
+  padding: 10px;
+}
+.privacy{
+  color: #029ccf;
+}
+/* portal end */
+
+/* aboutUs start */
+.teamSection{
+  background-color: darkgray;
+}
+/* aboutUs end */
+
+/* jobs start */
+
+/* jobs end */
+
+/* media queries start */
+@media (min-width: 800px) {
+  /*footer{
+    padding-left: 80px;
+  }*/
+}
+@media (min-width: 300px) and (max-width: 800px){
+ /*footer{
+    padding-left: 30px;
+  }*/
+}
+/* media queries end */

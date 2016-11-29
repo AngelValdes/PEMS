@@ -1,0 +1,37 @@
+{
+  "name": "pems",
+  "version": "1.0.0",
+  "description": "Public Education Management System",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/angelvaldes/PEMS.git"
+  },
+  "keywords": [
+    "portal",
+    "education"
+  ],
+  "author": "Angel Valdes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/angelvaldes/PEMS/issues"
+  },
+  "homepage": "https://github.com/angelvaldes/PEMS#readme",
+  "dependencies": {
+    "angular": "^1.5.8",
+    "angular-animate": "^1.5.8",
+    "angular-route": "^1.5.8",
+    "angular-sanitize": "^1.5.8",
+    "angular-ui-bootstrap": "^2.2.0",
+    "body-parser": "^1.15.2",
+    "bootstrap": "^3.3.7",
+    "bootstrap-social": "^5.0.0",
+    "express": "^4.14.0",
+    "font-awesome": "^4.7.0",
+    "jquery": "^3.1.1",
+    "jsonwebtoken": "^7.1.9"
+  }
+}
