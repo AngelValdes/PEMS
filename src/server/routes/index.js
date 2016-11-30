@@ -23,7 +23,7 @@ module.exports = (express, jwt)=>{
         { "schoolNumber": "7841", "schoolName": "Bradoth Middle", "address": "1234 SW 32nd Ave", "city": "Miami", "state": "FL", "phone": "3056573654" },
         "busInformation":
         { "routeNumber": "101", "busNumber": "1309", "pickupTime": "6:30am", "stopLocation": "1234 SW and 30th Ave" },
-        "courses": [
+        "enrollments": [
           { "id": 0, "title": "Math level 1", "electronicBook": "Math Basics", "room": "D4", "time": "8:00am - 9:15am", "absences": 2, "comments": "Good effort!", "teacherName": "Jorge Martinez", "teacherEmail": "jorge@mylearningdoor.com" },
           { "id": 1, "title": "Reading", "electronicBook": "Reading Basic", "room": "E3", "time": "9:15am - 10:15am", "absences": 1, "comments": "Good effort!", "teacherName": "Maria Martinez", "teacherEmail": "maria@mylearningdoor.com" },
           { "id": 2, "title": "History", "electronicBook": "Roman Empire 1", "room": "C2", "time": "10:30am - 11:30am", "absences": 0, "comments": "Bad effort!", "teacherName": "Luisa Fuentes", "teacherEmail": "luisa@mylearningdoor.com" }

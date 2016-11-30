@@ -23,7 +23,13 @@ const user = sequelize.define('user', { // define user model
   password: { type: DataTypes.STRING, allowNull: false },
   first: DataTypes.STRING,
   last: DataTypes.STRING,
-  dob: DataTypes.DATE
+  dob: DataTypes.DATE,
+  email: DataTypes.STRING,
+  address: DataTypes.STRING,
+  city: DataTypes.STRING,
+  state: DataTypes.STRING,
+  zipCode: DataTypes.STRING,
+  phone: DataTypes.STRING
 });
 
 const userType = sequelize.define('userType', { // define userType model
@@ -38,11 +44,7 @@ const userType = sequelize.define('userType', { // define userType model
 
 const student = sequelize.define('student', { // define student model
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-  address: DataTypes.STRING,
-  city: DataTypes.STRING,
-  state: DataTypes.STRING,
-  zipCode: DataTypes.STRING,
-  phone: DataTypes.STRING
+  grade: DataTypes.TEXT
 });
 
 const school = sequelize.define('school', { // define school model
@@ -53,4 +55,31 @@ const school = sequelize.define('school', { // define school model
   state: DataTypes.STRING,
   zipCode: DataTypes.STRING,
   phone: DataTypes.STRING
+});
+
+const bus = sequelize.define('bus', { // define bus model
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  Number: { type: DataTypes.STRING, allowNull: false },
+  routeNumber: DataTypes.STRING,
+  pickupTime: DataTypes.STRING,
+  stopLocation: DataTypes.STRING
+});
+
+const enrollment = sequelize.define('enrollment', { // define enrollment model
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  room: DataTypes.STRING,
+  time: DataTypes.STRING,
+  absences: DataTypes.INTEGER,
+  comments: DataTypes.STRING
+});
+
+const course = sequelize.define('course', { // define course model
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  title: { type: DataTypes.STRING, allowNull: false },
+  electronicBook: DataTypes.STRING
+});
+
+const teacher = sequelize.define('teacher', { // define teacher model
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  certificationArea: DataTypes.STRING
 });
