@@ -12,7 +12,7 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, proces
     idle: 10000
   },
   define: {
-    timestamps: true // true by default
+    timestamps: true 
   }
 });
 
@@ -83,3 +83,21 @@ const teacher = sequelize.define('teacher', { // define teacher model
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
   certificationArea: DataTypes.STRING
 });
+
+// Entities relationships
+user.hasOne(userType, { foreignKey: 'userTypeId' });
+student.belongsTo(user, { foreignKey: 'userId' });
+
+
+sequelize.sync()
+    .then(() => {
+      // logger.debug('All models are synchronized\n', 0);
+    })
+    .catch(() => {
+      // logger.debug('Model synchronization error: ' + error + '\n', 2);
+    });
+
+exports.sequelize = sequelize;
+exports.user = user;
+exports.student = student;
+

@@ -1,7 +1,14 @@
 
 <link href="/contents/loginStyle.css" rel="stylesheet">
-<div class="container loginContainer">
-      <form class="form-signin">
+<style>
+    .modal-backdrop.in {
+        filter: alpha(opacity=50);
+        opacity: 0.9;
+    }
+</style>
+
+<div class="loginContainer text-center">
+      <form class="form-signin text-center">
         <div class="formHeader">
           <h2 class="form-signin-heading text-center"><span class="glyphicon glyphicon-lock"></span>Login</h2>
         </div>
@@ -28,7 +35,9 @@
           </div>
         </div>
         <div class="formFooter text-center">
-          <a class="btn btn-block" href="#/privatePortal"><span class="glyphicon glyphicon-play-circle"></span></a>
+          <a class="btn btn-block" href ng-click="vm.changePage()"><span class="glyphicon glyphicon-play-circle"></span></a>
         </div>            
       </form>
 </div> 
+</div>
+
