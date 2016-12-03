@@ -1,7 +1,8 @@
 <div ng-controller="carouselController as vm">
   <div uib-carousel active="vm.active" interval="vm.myInterval" no-wrap="vm.noWrapSlides">
     <div uib-slide ng-repeat="slide in vm.slides track by slide.id" index="slide.id">
-      <img ng-src="{{slide.image}}" style="margin:auto;">
+      <img ng-src="{{slide.image}}" alt="{{slide.alt}}" style="margin:auto;" width="100%" class="img-responsive center-block hidden-xs"><!--height:220px!important;-->
+      <img ng-src="{{slide.imageSmall}}" alt="{{slide.alt}}" style="margin:auto;" width="100%" class="img-responsive center-block hidden-sm hidden-md hidden-lg">
       <div class="carousel-caption">
         <h4>Slide {{slide.text}}</h4>
       </div>
