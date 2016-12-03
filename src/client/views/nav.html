@@ -20,16 +20,13 @@
     </div><!--/.navbar-collapse -->
   </div>
 </nav>
-    <script>
-        $("li")
-            /*.mouseover(function() {
-                $(this).animate({ fontSize: "16pt" }, 300);
-            })
-            .mouseout(function() {
-                $(this).animate({ fontSize: "11pt" }, 100);
-            })*/
-            .click(function() {
-                $("li").attr("class", "");
-                $(this).attr("class", "active");
-            });
-    </script>
+<script>
+  $("li").click(function() {
+      $("li").attr("class", "");
+      $(this).attr("class", "active");
+  });
+  $('.navbar-collapse a').click(function(){
+      $(".navbar-collapse").collapse('hide');
+  });
+</script>
+
