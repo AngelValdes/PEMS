@@ -84,7 +84,7 @@ const teacher = sequelize.define('teacher', { // define teacher model
   certificationArea: DataTypes.STRING
 });
 
-// Entities relationships
+// Entities relationships (pending)
 user.hasOne(userType, { foreignKey: 'userTypeId' });
 student.belongsTo(user, { foreignKey: 'userId' });
 
