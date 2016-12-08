@@ -26,7 +26,7 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, proces
 
 // ORM Entities Models and UnitOfWork
 const user = sequelize.define('user', { // define user model
-  id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
+  userId: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
   username: { type: Sequelize.STRING, allowNull: false },
   password: { type: Sequelize.STRING, allowNull: false },
   first: Sequelize.STRING,
@@ -38,15 +38,23 @@ const user = sequelize.define('user', { // define user model
   state: Sequelize.STRING,
   zipCode: Sequelize.STRING,
   phone: Sequelize.STRING
-});
+}, {
+      indexes: [ // Create a unique index on username
+          {
+              unique: true,
+              fields: ['username']
+          },
+      ]
+    }
+);
 
 const student = sequelize.define('student', { // define student model
-  id: { type: Sequelize.INTEGER, primaryKey: true, references: { model: 'user', key: 'id' } },
+  studentId: { type: Sequelize.INTEGER, primaryKey: true, references: { model: 'users', key: 'userId' } },
   grade: Sequelize.TEXT
 });
 
-/*const userType = sequelize.define('userType', { // define userType model
-  id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
+const userType = sequelize.define('userType', { // define userType model
+  userTypeId: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
   name: { type: Sequelize.STRING, allowNull: false },
   description: Sequelize.TEXT
 },
@@ -54,7 +62,7 @@ const student = sequelize.define('student', { // define student model
     timestamps: false
   }
 );
-
+/*
 
 
 const school = sequelize.define('school', { // define school model
@@ -94,10 +102,10 @@ const teacher = sequelize.define('teacher', { // define teacher model
   certificationArea: Sequelize.STRING
 });*/
 
-//Entities relationships
-//user.hasOne(userType, { foreignKey: 'userTypeId' });
-//user.belongsTo(student, { foreignKey: 'studentId' });
-user.hasOne(student);
+//Entities relationships (hasOne, belongsTo, hasMany, belongsToMany, references )
+user.belongsToMany(userType, {through: 'UserToUserType', foreignKey: 'userId'});
+userType.belongsToMany(user, {through: 'UserToUserType', foreignKey: 'userTypeId'});
+
 
 sequelize.sync()
   .then(() => {
@@ -110,5 +118,5 @@ sequelize.sync()
 exports.sequelize = sequelize;
 exports.user = user;
 exports.student = student;
-//exports.userType = userType;
+exports.userType = userType;
 
