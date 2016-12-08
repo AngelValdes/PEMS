@@ -1,5 +1,4 @@
-// User Repository
-const db = require('./db');
+const db = require('./db'); // unit of work
 // getAll including relations
 exports.findAll = (err, success) => {
   db.user.findAll({ include: [{ all: true, nested: true }]}).then(success).catch(err);

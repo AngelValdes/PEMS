@@ -36,6 +36,7 @@
     "jquery": "^3.1.1",
     "jsonwebtoken": "^7.1.9",
     "sequelize": "^3.27.0",
+    "tedious": "^1.14.0",
     "winston": "^2.3.0"
   }
 }

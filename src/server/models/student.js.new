@@ -1,0 +1,66 @@
+// mocked data
+var students = [
+      {
+        "id": 0, "first": "Student0", "last": "Valdes", "address": "21387 SW 23rd Ave", "city": "Miami", "state": "FL", "zipCode": "33173", "phone": "3059876765",
+        "school":
+        { "schoolNumber": "7841", "schoolName": "Bradoth Middle", "address": "1234 SW 32nd Ave", "city": "Miami", "state": "FL", "phone": "3056573654" },
+        "busInformation":
+        { "routeNumber": "101", "busNumber": "1309", "pickupTime": "6:30am", "stopLocation": "1234 SW and 30th Ave" },
+        "enrollments": [
+          { "id": 0, "title": "Math level 1", "electronicBook": "Math Basics", "room": "D4", "time": "8:00am - 9:15am", "absences": 2, "comments": "Good effort!", "teacherName": "Jorge Martinez", "teacherEmail": "jorge@mylearningdoor.com" },
+          { "id": 1, "title": "Reading", "electronicBook": "Reading Basic", "room": "E3", "time": "9:15am - 10:15am", "absences": 1, "comments": "Good effort!", "teacherName": "Maria Martinez", "teacherEmail": "maria@mylearningdoor.com" },
+          { "id": 2, "title": "History", "electronicBook": "Roman Empire 1", "room": "C2", "time": "10:30am - 11:30am", "absences": 0, "comments": "Bad effort!", "teacherName": "Luisa Fuentes", "teacherEmail": "luisa@mylearningdoor.com" }
+        ]
+      },
+      {
+        "id": 1, "first": "Student1", "last": "Valdes", "address": "11387 SW 23rd Ave", "city": "Miami", "state": "FL", "zipCode": "33171", "phone": "3051116765",
+        "school":
+        { "schoolNumber": "7111", "schoolName": "Normanday High", "address": "111 SW 32nd Ave", "city": "Miami", "state": "FL", "phone": "3051113654" },
+        "busInformation":
+        { "routeNumber": "102", "busNumber": "1311", "pickupTime": "6:30am", "stopLocation": "111 SW and 30th Ave" },
+        "courses": [
+          { "id": 0, "title": "Math level 3", "electronicBook": "Math Calculus", "room": "D4", "time": "8:00am - 9:15am", "absences": 0, "comments": "Good effort!", "teacherName": "Jorge Martinez", "teacherEmail": "jorge@mylearningdoor.com" },
+          { "id": 1, "title": "Reading Advanced", "electronicBook": "Reading Advanced", "room": "E3", "time": "9:15am - 10:15am", "absences": 0, "comments": "Good effort!", "teacherName": "Maria Martinez", "teacherEmail": "maria@mylearningdoor.com" },
+          { "id": 2, "title": "History Adv", "electronicBook": "Atlantis", "room": "C2", "time": "10:30am - 11:30am", "absences": 0, "comments": "Excellent effort!", "teacherName": "Luisa Fuentes", "teacherEmail": "luisa@mylearningdoor.com" }
+        ]
+      }
+    ];
+
+const db = require('./db'); // unit of work
+// getAll including relations
+exports.findAll = (err, success) => {
+  db.student.findAll({ include: [{ all: true, nested: true }]}).then(success).catch(err);
+};
+// getById including relations
+exports.findById = (payload, err, success) => {
+  db.student.find({
+    where: {
+      id: payload.id
+    },
+    include: [ // include relations, even deeper multilevel
+            { all: true, nested: true },
+    ]
+  }).then(success).catch(err);
+};
+// insert new
+exports.create = (payload, err, success) => {
+  db.student.create(payload).then(success).catch(err);
+};
+// modify existing
+exports.update = (payload, err, success) => { // investigate Object.assign(entityObject, req.body)
+  db.student.find({
+    where: {
+      id: payload.id
+    },
+  }).then((data) => {
+    data.updateAttributes(payload).then(success).catch(err);
+  }).catch(err);
+};
+// delete existing
+exports.destroy = (payload, err, success) => {
+  db.student.destroy({
+    where: {
+      id: payload.id
+    },
+  }).then(success).catch(err);
+};

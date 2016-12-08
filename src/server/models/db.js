@@ -1,3 +1,11 @@
+// npm i --save sequelize -> ORM
+// npm i --save mysql2 -> connect to mysql database
+// npm i --save sqlite3 -> connect to sqllite
+// npm i --save tedious -> connect to mssql
+// npm i -g sequelize-auto -> to reverse engineer an existing database
+// sequelize-auto -o "./src/server/models/auto" -d pems -h localhost -u pemsUser -p 1433 -x pemsPass -e mssql
+const logger = require('winston'); //logging
+
 const Sequelize = require('sequelize');
 
 // configure connection to database
@@ -9,95 +17,98 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, proces
   pool: {
     max: 5,
     min: 0,
-    idle: 10000
+    idle: 10000,
   },
   define: {
-    timestamps: true
-  }
+    timestamps: false, // true by default
+  },
 });
 
 // ORM Entities Models and UnitOfWork
 const user = sequelize.define('user', { // define user model
-  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-  username: { type: DataTypes.STRING, allowNull: false },
-  password: { type: DataTypes.STRING, allowNull: false },
-  first: DataTypes.STRING,
-  last: DataTypes.STRING,
-  dob: DataTypes.DATE,
-  email: DataTypes.STRING,
-  address: DataTypes.STRING,
-  city: DataTypes.STRING,
-  state: DataTypes.STRING,
-  zipCode: DataTypes.STRING,
-  phone: DataTypes.STRING
+  id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
+  username: { type: Sequelize.STRING, allowNull: false },
+  password: { type: Sequelize.STRING, allowNull: false },
+  first: Sequelize.STRING,
+  last: Sequelize.STRING,
+  dob: Sequelize.DATE,
+  email: Sequelize.STRING,
+  address: Sequelize.STRING,
+  city: Sequelize.STRING,
+  state: Sequelize.STRING,
+  zipCode: Sequelize.STRING,
+  phone: Sequelize.STRING
 });
 
-const userType = sequelize.define('userType', { // define userType model
-  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-  name: { type: DataTypes.STRING, allowNull: false },
-  description: DataTypes.TEXT
+const student = sequelize.define('student', { // define student model
+  id: { type: Sequelize.INTEGER, primaryKey: true, references: { model: 'user', key: 'id' } },
+  grade: Sequelize.TEXT
+});
+
+/*const userType = sequelize.define('userType', { // define userType model
+  id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
+  name: { type: Sequelize.STRING, allowNull: false },
+  description: Sequelize.TEXT
 },
   {
     timestamps: false
   }
 );
 
-const student = sequelize.define('student', { // define student model
-  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-  grade: DataTypes.TEXT
-});
+
 
 const school = sequelize.define('school', { // define school model
-  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-  name: { type: DataTypes.STRING, allowNull: false },
-  address: DataTypes.STRING,
-  city: DataTypes.STRING,
-  state: DataTypes.STRING,
-  zipCode: DataTypes.STRING,
-  phone: DataTypes.STRING
+  id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
+  name: { type: Sequelize.STRING, allowNull: false },
+  address: Sequelize.STRING,
+  city: Sequelize.STRING,
+  state: Sequelize.STRING,
+  zipCode: Sequelize.STRING,
+  phone: Sequelize.STRING
 });
 
 const bus = sequelize.define('bus', { // define bus model
-  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-  Number: { type: DataTypes.STRING, allowNull: false },
-  routeNumber: DataTypes.STRING,
-  pickupTime: DataTypes.STRING,
-  stopLocation: DataTypes.STRING
+  id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
+  Number: { type: Sequelize.STRING, allowNull: false },
+  routeNumber: Sequelize.STRING,
+  pickupTime: Sequelize.STRING,
+  stopLocation: Sequelize.STRING
 });
 
 const enrollment = sequelize.define('enrollment', { // define enrollment model
-  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-  room: DataTypes.STRING,
-  time: DataTypes.STRING,
-  absences: DataTypes.INTEGER,
-  comments: DataTypes.STRING
+  id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
+  room: Sequelize.STRING,
+  time: Sequelize.STRING,
+  absences: Sequelize.INTEGER,
+  comments: Sequelize.STRING
 });
 
 const course = sequelize.define('course', { // define course model
-  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-  title: { type: DataTypes.STRING, allowNull: false },
-  electronicBook: DataTypes.STRING
+  id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
+  title: { type: Sequelize.STRING, allowNull: false },
+  electronicBook: Sequelize.STRING
 });
 
 const teacher = sequelize.define('teacher', { // define teacher model
-  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-  certificationArea: DataTypes.STRING
-});
+  id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
+  certificationArea: Sequelize.STRING
+});*/
 
-// Entities relationships (pending)
-user.hasOne(userType, { foreignKey: 'userTypeId' });
-student.belongsTo(user, { foreignKey: 'userId' });
-
+//Entities relationships
+//user.hasOne(userType, { foreignKey: 'userTypeId' });
+//user.belongsTo(student, { foreignKey: 'studentId' });
+user.hasOne(student);
 
 sequelize.sync()
-    .then(() => {
-      // logger.debug('All models are synchronized\n', 0);
+  .then(() => {
+      logger.log("info", "All models are synchronized\n");
     })
     .catch(() => {
-      // logger.debug('Model synchronization error: ' + error + '\n', 2);
+      logger.log("error", "Model synchronization error: " + error + "\n");
     });
 
 exports.sequelize = sequelize;
 exports.user = user;
 exports.student = student;
+//exports.userType = userType;
 
