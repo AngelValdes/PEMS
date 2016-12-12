@@ -19,15 +19,14 @@ app.use(express.static(__dirname + "/../../node_modules"));
 app.use("/", require("./routes")(express, jwt)); //add routes
 //test db
 
-require('./models/db').sequelize
-
-  .authenticate()
-  .then(function(err) {
-    console.log('Connection has been established successfully.');
-  })
-  .catch(function (err) {
-    console.log('Unable to connect to the database:', err);
-  });
+//require('./models/db').sequelize
+  // .authenticate()
+  // .then(function(err) {
+  //   console.log('Connection has been established successfully.');
+  // })
+  // .catch(function (err) {
+  //   console.log('Unable to connect to the database:', err);
+  // });
 
 app.listen(port, ()=>{logger.log("info", "server running on port " + port);});
 module.exports = app;

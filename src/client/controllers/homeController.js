@@ -3,7 +3,7 @@
     .controller("homeController", ["$uibModal",homeController]);
     function homeController($uibModal){
         var vm = this;
-  
+
   vm.openModal = openModal;
 
   function openModal() {
@@ -16,7 +16,7 @@
                 size: "sm",
                 resolve: {
                     items: function () {
-                        var value = {                           
+                        var value = {
                         };
                         return value;
                     },
@@ -27,6 +27,6 @@
             });
         };
 
-     
+
     }
  })();

@@ -1,15 +1,15 @@
 // student routes
-//const student = require("../../models/student");//student repository
 const logger = require("winston"); //logging
+const student = require("../../models/student");//student repository
 
 module.exports = (express, jwt) => {
   const router = express.Router();
-  /*const secret = process.env.AUTH_SUPERSECRET || "supersecret";
+  const secret = process.env.AUTH_SUPERSECRET || "supersecret";
   // route: select all students
   router.get("/students", (req, res) => {
     var token = req.query.token;
-    jwt.verify(token, secret, (err, decoded) => {
-      if (!err) { //authorized
+    //jwt.verify(token, secret, (err, decoded) => {
+      if (1===1) { //authorized !err
         student.findAll(
             (err) => { // if error, log and return error status and message
               logger.log("error", "All students read error:" + err.message + "\n");
@@ -22,13 +22,13 @@ module.exports = (express, jwt) => {
       } else { //unauthorized
         res.status(401).send(err);
       }
-    });
+    //});
   });
   // route: select one student by id
   router.get("/students/:id", (req, res) => {
     var token = req.query.token;
-    jwt.verify(token, secret, (err, decoded)=>{
-      if(!err){ //authorized
+    //jwt.verify(token, secret, (err, decoded)=>{
+      if(1===1){ //authorized
         student.findById(req.params,
           (err) => {
             logger.log("error", "by id student read error:" + err.message + "\n");
@@ -42,7 +42,7 @@ module.exports = (express, jwt) => {
           res.status(401).send(err);
       }
     });
-  });
+  //});
   // route: insert new student
   router.post("/students", (req, res) => {
     jwt.verify(token, secret, (err, decoded)=>{
@@ -65,7 +65,7 @@ module.exports = (express, jwt) => {
   router.put("/students/:id", (req, res) => {
     jwt.verify(token, secret, (err, decoded)=>{
       if(!err){ //authorized
-        /* eslint no-param-reassign: 0 */ /*
+        /* eslint no-param-reassign: 0 */
         req.body.id = req.params.id; // recommended by instructor
         student.update(req.body,
           (err) => {
@@ -107,7 +107,7 @@ module.exports = (express, jwt) => {
           res.status(401).send(err);
       }
     });
-  });*/
+  });
 
   return router;
 };

@@ -2,7 +2,7 @@
 <div class="container privatePortalContent">
   <div ng-controller="tabsController as vm">
     <uib-tabset active="active">
-      <uib-tab index="0" heading="Student">   
+      <uib-tab index="0" heading="Student">
         <div class="row studentInfo">
           <div class="col-md-4 col-sm-4">
             <div class="">
@@ -35,58 +35,58 @@
             </div>
           </div>
         </div>
-        <table class="table table-striped table-hover"> 
-          <thead> 
-            <tr> 
-              <th class="hidden-xs">#</th> 
-              <th>Course</th> 
-              <th>Room | Time</th> 
-              <th class="hidden-xs">Absences | Comments</th> 
-              <th class="hidden-xs">Teacher</th> 
-            </tr> 
-          </thead> 
-          <tbody> 
-            <tr> 
-              <th scope=row  class="hidden-xs">1</th> 
-              <td><a href=""><span class="glyphicon glyphicon-book hidden-xs"></span> Math level 1</a></td> 
-              <td class="hidden-xs">D4 | 8:00am - 9:15am</td> 
-              <td class="hidden-sm hidden-md hidden-lg">D4|~ 8-9am</td> 
-              <td  class="hidden-xs">2 | Good effort!</td> 
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th class="hidden-xs">#</th>
+              <th>Course</th>
+              <th>Room | Time</th>
+              <th class="hidden-xs">Absences | Comments</th>
+              <th class="hidden-xs">Teacher</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope=row  class="hidden-xs">1</th>
+              <td><a href=""><span class="glyphicon glyphicon-book hidden-xs"></span> Math level 1</a></td>
+              <td class="hidden-xs">D4 | 8:00am - 9:15am</td>
+              <td class="hidden-sm hidden-md hidden-lg">D4|~ 8-9am</td>
+              <td  class="hidden-xs">2 | Good effort!</td>
               <td  class="hidden-xs"><a mailto="jorge@company.com">Jorge Martinez</a></td>
-            </tr> 
-            <tr> 
-              <th scope=row  class="hidden-xs">2</th> 
-              <td><a href=""><span class="glyphicon glyphicon-book hidden-xs"></span> Reading Basic</a></td> 
-              <td class="hidden-xs">E3 | 9:15am - 10:15am</td> 
-              <td class="hidden-sm hidden-md hidden-lg">E3|~ 9-10am</td> 
-              <td  class="hidden-xs">1 | Good effort!</td> 
+            </tr>
+            <tr>
+              <th scope=row  class="hidden-xs">2</th>
+              <td><a href=""><span class="glyphicon glyphicon-book hidden-xs"></span> Reading Basic</a></td>
+              <td class="hidden-xs">E3 | 9:15am - 10:15am</td>
+              <td class="hidden-sm hidden-md hidden-lg">E3|~ 9-10am</td>
+              <td  class="hidden-xs">1 | Good effort!</td>
               <td  class="hidden-xs"><a mailto="maria@company.com">Maria Martinez</a></td>
             </tr>
-            <tr> 
-              <th scope=row  class="hidden-xs">3</th> 
-              <td><a href=""><span class="glyphicon glyphicon-book hidden-xs"></span> history</a></td> 
-              <td class="hidden-xs">D4 | 10:30am - 11:30am</td> 
+            <tr>
+              <th scope=row  class="hidden-xs">3</th>
+              <td><a href=""><span class="glyphicon glyphicon-book hidden-xs"></span> history</a></td>
+              <td class="hidden-xs">D4 | 10:30am - 11:30am</td>
               <td class="hidden-sm hidden-md hidden-lg">D4|~ 10-11am</td>
-              <td  class="hidden-xs">0 | Bad effort!</td> 
+              <td  class="hidden-xs">0 | Bad effort!</td>
               <td  class="hidden-xs"><a mailto="luisa@company.com">Luisa Fuentes</a></td>
-            </tr>  
-            <tr> 
-              <th scope=row  class="hidden-xs">4</th> 
-              <td><a href=""><span class="glyphicon glyphicon-book hidden-xs"></span> Biology 1</a></td> 
-              <td class="hidden-xs">D4 | 1:00pm - 2:35pm</td> 
+            </tr>
+            <tr>
+              <th scope=row  class="hidden-xs">4</th>
+              <td><a href=""><span class="glyphicon glyphicon-book hidden-xs"></span> Biology 1</a></td>
+              <td class="hidden-xs">D4 | 1:00pm - 2:35pm</td>
               <td class="hidden-sm hidden-md hidden-lg">D4|~ 1-2Pm</td>
-              <td  class="hidden-xs">5 | Bad actitude!</td> 
+              <td  class="hidden-xs">5 | Bad actitude!</td>
               <td  class="hidden-xs"><a mailto="melisa@company.com">Melisa Garcia</a></td>
-            </tr> 
-            <tr> 
-              <th scope=row  class="hidden-xs">5</th> 
-              <td><a href=""><span class="glyphicon glyphicon-book hidden-xs"></span> Math level 2</a></td> 
-              <td class="hidden-xs">D4 | 2:45pm - 3:45pm</td> 
+            </tr>
+            <tr>
+              <th scope=row  class="hidden-xs">5</th>
+              <td><a href=""><span class="glyphicon glyphicon-book hidden-xs"></span> Math level 2</a></td>
+              <td class="hidden-xs">D4 | 2:45pm - 3:45pm</td>
               <td class="hidden-sm hidden-md hidden-lg">D4|~ 2-4Pm</td>
-              <td  class="hidden-xs">2 | Good effort!</td> 
+              <td  class="hidden-xs">2 | Good effort!</td>
               <td  class="hidden-xs"><a mailto="jorge@company.com">Jorge Martinez</a></td>
-            </tr> 
-          </tbody> 
+            </tr>
+          </tbody>
         </table>
       </uib-tab>
       <uib-tab class="hidden-xs" index="$index + 1" ng-repeat="tab in vm.tabs" heading="{{tab.title}}" disable="tab.disabled">
