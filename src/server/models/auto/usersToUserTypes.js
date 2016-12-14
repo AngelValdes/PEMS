@@ -15,12 +15,12 @@ module.exports = function(sequelize, DataTypes) {
         key: 'userTypeId'
       }
     },
-    userId: {
-      type: DataTypes.INTEGER,
+    username: {
+      type: DataTypes.STRING,
       allowNull: true,
       references: {
         model: 'users',
-        key: 'userId'
+        key: 'username'
       }
     }
   }, {

@@ -18,7 +18,7 @@ exports.findAll = (err, success) => {
 exports.findById = (payload, err, success) => {
   db.user.find({
     where: {
-      userId: payload.id
+      username: payload.id
     },
     include: [ // include relations, even deeper multilevel
             { all: true, nested: true },
@@ -33,17 +33,17 @@ exports.create = (payload, err, success) => {
 exports.update = (payload, err, success) => { // investigate Object.assign(entityObject, req.body)
   db.user.find({
     where: {
-      userId: payload.id
+      username: payload.id
     },
   }).then((data) => {
     data.updateAttributes(payload).then(success).catch(err);
   }).catch(err);
 };
-// delete existing, needs to resolve fact that info is in user and sutdent table
+// delete existing, needs to resolve fact that info is in user and student table
 exports.destroy = (payload, err, success) => {
   db.user.destroy({
     where: {
-      userId: payload.id
+      username: payload.id
     },
   }).then(success).catch(err);
 };

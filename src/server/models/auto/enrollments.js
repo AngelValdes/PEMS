@@ -24,19 +24,19 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     },
     studentId: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: true,
       references: {
         model: 'students',
-        key: 'studentId'
+        key: 'username'
       }
     },
     schoolId: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: true,
       references: {
         model: 'schools',
-        key: 'schoolId'
+        key: 'schoolNumber'
       }
     },
     courseId: {
@@ -48,11 +48,11 @@ module.exports = function(sequelize, DataTypes) {
       }
     },
     teacherId: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: true,
       references: {
         model: 'teachers',
-        key: 'teacherId'
+        key: 'username'
       }
     }
   }, {

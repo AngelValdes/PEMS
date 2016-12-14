@@ -26,18 +26,13 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, proces
 
 // ORM Entities Models and UnitOfWork
 const user = sequelize.define('user', { // define user model
-  userId: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
-  username: { type: Sequelize.STRING, allowNull: false },
-  password: { type: Sequelize.STRING, allowNull: false },
-  first: Sequelize.STRING,
-  last: Sequelize.STRING,
+  username: { type: Sequelize.STRING(10), allowNull: false, primaryKey: true },
+  password: { type: Sequelize.STRING(50), allowNull: false },
+  first: Sequelize.STRING(30),
+  last: Sequelize.STRING(30),
   dob: Sequelize.DATE,
-  email: Sequelize.STRING,
-  address: Sequelize.STRING,
-  city: Sequelize.STRING,
-  state: Sequelize.STRING,
-  zipCode: Sequelize.STRING,
-  phone: Sequelize.STRING
+  email: Sequelize.STRING(100),
+  phone: Sequelize.STRING(10)
 },
 {
   tableName: 'users'
@@ -46,15 +41,15 @@ const user = sequelize.define('user', { // define user model
   indexes: [ // Create a unique index on username
     {
         unique: true,
-        fields: ['username']
+        fields: ['last']
     }
   ]
 }
 );
 
 const student = sequelize.define('student', { // define student model
-  studentId: { type: Sequelize.INTEGER, primaryKey: true, references: { model: 'users', key: 'userId' } },
-  grade: Sequelize.TEXT
+  username: { type: Sequelize.STRING(10), primaryKey: true, references: { model: 'users', key: 'username' } },
+  gradeLevel: Sequelize.STRING(50)
 },
 {
   tableName: 'students'
@@ -63,7 +58,7 @@ const student = sequelize.define('student', { // define student model
 
 const userType = sequelize.define('userType', { // define userType model
   userTypeId: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
-  name: { type: Sequelize.STRING, allowNull: false },
+  name: { type: Sequelize.STRING(50), allowNull: false },
   description: Sequelize.TEXT
 },
 {
@@ -76,7 +71,7 @@ const userType = sequelize.define('userType', { // define userType model
 
 const usersToUserTypes = sequelize.define('usersToUserTypes', { //
   userTypeId: { type: Sequelize.INTEGER, references: {model: 'userTypes',key: 'userTypeId'} },
-  userId: { type: Sequelize.INTEGER, references: { model: 'users', key: 'userId' } }
+  username: { type: Sequelize.STRING(10), references: { model: 'users', key: 'username' } }
 },
 {
   timestamps: false
@@ -87,14 +82,14 @@ const usersToUserTypes = sequelize.define('usersToUserTypes', { //
 );
 
 const school = sequelize.define('school', { // define school model
-  schoolId: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
-  name: { type: Sequelize.STRING, allowNull: false },
-  addressLine1: { type: "NCHAR", allowNull: true },
-  addressLine2: { type: "NCHAR", allowNull: true },
-  city: { type: "NCHAR", allowNull: true },
-  state: { type: "NCHAR", allowNull: true },
-  zipCode: { type: "NCHAR", allowNull: true },
-  phone: Sequelize.STRING
+  schoolNumber: { type: Sequelize.STRING(4), primaryKey: true },
+  name: { type: Sequelize.STRING(100), allowNull: false },
+  addressLine1: { type: Sequelize.STRING(100), allowNull: true },
+  addressLine2: { type: Sequelize.STRING(100), allowNull: true },
+  city: { type: Sequelize.STRING(50), allowNull: true },
+  state: { type: Sequelize.STRING(2), allowNull: true },
+  zipCode: { type: Sequelize.STRING(5), allowNull: true },
+  phone: Sequelize.STRING(10)
 },
 {
   tableName: 'schools'
@@ -103,8 +98,8 @@ const school = sequelize.define('school', { // define school model
 
 const course = sequelize.define('course', { // define course model
   courseId: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
-  title: { type: Sequelize.STRING, allowNull: false },
-  electronicBook: Sequelize.STRING
+  title: { type: Sequelize.STRING(100), allowNull: false },
+  electronicBook: Sequelize.STRING(100)
 },
 {
   tableName: 'courses'
@@ -112,8 +107,8 @@ const course = sequelize.define('course', { // define course model
 );
 
 const teacher = sequelize.define('teacher', { // define teacher model
-  teacherId: { type: Sequelize.INTEGER, primaryKey: true,  references: {model: 'users', key: 'userId'} },
-  certificationArea: Sequelize.STRING
+  username: { type: Sequelize.STRING(10), primaryKey: true,  references: {model: 'users', key: 'username'} },
+  certificationArea: Sequelize.STRING(20)
 },
 {
   tableName: 'teachers'
@@ -121,14 +116,13 @@ const teacher = sequelize.define('teacher', { // define teacher model
 );
 
 const address = sequelize.define('address', { // define address model
-    schoolId: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
-    name: { type: Sequelize.STRING, allowNull: false },
-    addressLine1: { type: "NCHAR", allowNull: true },
-    addressLine2: { type: "NCHAR", allowNull: true },
-    city: { type: "NCHAR", allowNull: true },
-    state: { type: "NCHAR", allowNull: true },
-    zipCode: { type: "NCHAR", allowNull: true },
-    userId: { type: Sequelize.INTEGER, allowNull: true, references: { model: 'users', key: 'userId' }
+    name: { type: Sequelize.STRING(50), allowNull: false },
+    addressLine1: { type: Sequelize.STRING(100), allowNull: true },
+    addressLine2: { type: Sequelize.STRING(100), allowNull: true },
+    city: { type: Sequelize.STRING(50), allowNull: true },
+    state: { type: Sequelize.STRING(2), allowNull: true },
+    zipCode: { type: Sequelize.STRING(5), allowNull: true },
+    ownerId: { type: Sequelize.STRING(10), allowNull: true
     }
 },
 {
@@ -138,14 +132,14 @@ const address = sequelize.define('address', { // define address model
 
 const enrollment = sequelize.define('enrollment', { // define enrollment model
   enrollmentId: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
-  room: { type: Sequelize.STRING, allowNull: true },
-  time: { type: Sequelize.STRING, allowNull: true },
+  room: { type: Sequelize.STRING(25), allowNull: true },
+  time: { type: Sequelize.STRING(50), allowNull: true },
   absences: { type: Sequelize.INTEGER, allowNull: true },
-  comments: { type: Sequelize.STRING, allowNull: true },
-  studentId: { type: Sequelize.INTEGER, allowNull: true, references: { model: 'students', key: 'studentId' } },
-  schoolId: { type: Sequelize.INTEGER, allowNull: true, references: { model: 'schools', key: 'schoolId' } },
+  comments: { type: Sequelize.STRING(50), allowNull: true },
+  studentId: { type: Sequelize.STRING(10), allowNull: true, references: { model: 'students', key: 'username' } },
+  schoolId: { type: Sequelize.STRING(4), allowNull: true, references: { model: 'schools', key: 'schoolNumber' } },
   courseId: { type: Sequelize.INTEGER, allowNull: true, references: { model: 'courses', key: 'courseId' } },
-  teacherId: { type: Sequelize.INTEGER, allowNull: true, references: { model: 'teachers', key: 'teacherId' } }
+  teacherId: { type: Sequelize.STRING(10), allowNull: true, references: { model: 'teachers', key: 'username' } }
 },
 {
   tableName: 'enrollments'
@@ -153,7 +147,7 @@ const enrollment = sequelize.define('enrollment', { // define enrollment model
 );
 
 //Entities relationships (hasOne, belongsTo, hasMany, belongsToMany, references )
-//user.hasMany(address);
+//student.belongsTo(user);
 //user.belongsToMany(userType, {through: 'usersToUserTypes', foreignKey: 'userId'});
 //userType.belongsToMany(user, { through: 'usersToUserTypes', foreignKey: 'userTypeId' });
 //student.hasOne(user);

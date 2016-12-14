@@ -18,19 +18,27 @@ var students = [
 const db = require('./db'); // unit of work
 // getAll including relations
 exports.findAll = (err, success) => {
-  db.student.findAll({ include: [{ all: true, nested: true }]}).then(success).catch(err);
+  db.student.findAll({ include: [{ all: true, nested: true }]}).then(success).catch(err); //
 };
 // getById including relations
 exports.findById = (payload, err, success) => {
   db.student.find({
     where: {
-      studentId: payload.id
+      username: payload.id
     },
     include: [ // include relations, even deeper multilevel
             { all: true, nested: true },
     ]
   }).then(success).catch(err);
 };
+
+exports.findByIdWithFullInfo = (payload, err, success) => {
+  db.sequelize.query("SELECT * FROM users WHERE username = :username",
+    { replacements: { username: payload.id }, type: db.sequelize.QueryTypes.SELECT }
+  )
+    .then(success).catch(err);
+};
+
 // insert new, needs to resolve fact that info is in user and sutdent table
 exports.create = (payload, err, success) => {
   db.student.create(payload).then(success).catch(err);
@@ -39,7 +47,7 @@ exports.create = (payload, err, success) => {
 exports.update = (payload, err, success) => { // investigate Object.assign(entityObject, req.body)
   db.student.find({
     where: {
-      studentId: payload.id
+      username: payload.id
     },
   }).then((data) => {
     data.updateAttributes(payload).then(success).catch(err);
@@ -49,7 +57,7 @@ exports.update = (payload, err, success) => { // investigate Object.assign(entit
 exports.destroy = (payload, err, success) => {
   db.student.destroy({
     where: {
-      StudentId: payload.id
+      username: payload.id
     },
   }).then(success).catch(err);
 };

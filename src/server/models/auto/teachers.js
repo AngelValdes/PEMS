@@ -2,12 +2,12 @@
 
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('teachers', {
-    teacherId: {
-      type: DataTypes.INTEGER,
+    username: {
+      type: DataTypes.STRING,
       allowNull: false,
       references: {
         model: 'users',
-        key: 'userId'
+        key: 'username'
       }
     },
     certificationArea: {

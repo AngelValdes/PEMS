@@ -2,15 +2,15 @@
 
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('students', {
-    studentId: {
-      type: DataTypes.INTEGER,
+    username: {
+      type: DataTypes.STRING,
       allowNull: false,
       references: {
         model: 'users',
-        key: 'userId'
+        key: 'username'
       }
     },
-    grade: {
+    gradeLevel: {
       type: DataTypes.STRING,
       allowNull: true
     }

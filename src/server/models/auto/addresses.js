@@ -2,7 +2,7 @@
 
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('addresses', {
-    schoolId: {
+    id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
@@ -12,32 +12,28 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false
     },
     addressLine1: {
-      type: "NCHAR",
+      type: DataTypes.STRING,
       allowNull: true
     },
     addressLine2: {
-      type: "NCHAR",
+      type: DataTypes.STRING,
       allowNull: true
     },
     city: {
-      type: "NCHAR",
+      type: DataTypes.STRING,
       allowNull: true
     },
     state: {
-      type: "NCHAR",
+      type: DataTypes.STRING,
       allowNull: true
     },
     zipCode: {
-      type: "NCHAR",
+      type: DataTypes.STRING,
       allowNull: true
     },
-    userId: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-      references: {
-        model: 'users',
-        key: 'userId'
-      }
+    ownerId: {
+      type: DataTypes.STRING,
+      allowNull: true
     }
   }, {
     tableName: 'addresses'
