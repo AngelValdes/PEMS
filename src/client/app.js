@@ -3,7 +3,9 @@
     .config(function($routeProvider) {
       $routeProvider
       .when("/", {
-        templateUrl : "/views/home.html"
+        templateUrl: "/views/home.html",
+        controller: "homeController",
+        controllerAs: "home"
       })
       .when("/portal", {
         templateUrl : "/views/portal.html"
@@ -13,7 +15,8 @@
       })
       .when("/privatePortal", {
         templateUrl: "/views/privatePortal.html",
-        controller: ""
+        controller: "privatePortalController",
+        controllerAs: "privatePortal"
       })
       .when("/aboutus", {
         templateUrl : "/views/aboutus.html"

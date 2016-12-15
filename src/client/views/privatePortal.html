@@ -8,9 +8,10 @@
             <div class="">
               <h4>Student Bio</h4>
               <ul class="">
-                <li>First Last</li>
-                <li>Address, city, State</li>
-                <li>Contact phone#</li>
+                <li>{{privatePortal.user.first}} {{privatePortal.user.last}}</li>
+                <li>{{privatePortal.user.addresses[0].addressLine1}}, {{privatePortal.user.addresses[0].city}}, {{privatePortal.user.addresses[0].state}}</li>
+                <li>Zip code: {{privatePortal.user.addresses[0].zipCode}}</li>
+                <li>Contact phone# {{privatePortal.user.phone}}</li>
               </ul>
             </div>
           </div>
@@ -18,9 +19,9 @@
             <div class="">
               <h4>School Information</h4>
               <ul class="">
-                <li>Loc-School Name</li>
-                <li>Address, city, state</li>
-                <li>School main number</li>
+                <li>{{privatePortal.user.MainLocationNumber}} - {{privatePortal.user.mainLocationName}}</li>
+                <li>{{privatePortal.user.mainLocationAddressLine1}}, {{privatePortal.user.mainLocationCity}}, {{privatePortal.user.mainLocationState}}</li>
+                <li>School main number: {{privatePortal.user.mainLocationPhone}}</li>
               </ul>
             </div>
           </div>
@@ -46,45 +47,13 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
+            <tr ng-repeat="enrollment in privatePortal.user.enrollments">
               <th scope=row  class="hidden-xs">1</th>
-              <td><a href=""><span class="glyphicon glyphicon-book hidden-xs"></span> Math level 1</a></td>
-              <td class="hidden-xs">D4 | 8:00am - 9:15am</td>
-              <td class="hidden-sm hidden-md hidden-lg">D4|~ 8-9am</td>
-              <td  class="hidden-xs">2 | Good effort!</td>
-              <td  class="hidden-xs"><a mailto="jorge@company.com">Jorge Martinez</a></td>
-            </tr>
-            <tr>
-              <th scope=row  class="hidden-xs">2</th>
-              <td><a href=""><span class="glyphicon glyphicon-book hidden-xs"></span> Reading Basic</a></td>
-              <td class="hidden-xs">E3 | 9:15am - 10:15am</td>
-              <td class="hidden-sm hidden-md hidden-lg">E3|~ 9-10am</td>
-              <td  class="hidden-xs">1 | Good effort!</td>
-              <td  class="hidden-xs"><a mailto="maria@company.com">Maria Martinez</a></td>
-            </tr>
-            <tr>
-              <th scope=row  class="hidden-xs">3</th>
-              <td><a href=""><span class="glyphicon glyphicon-book hidden-xs"></span> history</a></td>
-              <td class="hidden-xs">D4 | 10:30am - 11:30am</td>
-              <td class="hidden-sm hidden-md hidden-lg">D4|~ 10-11am</td>
-              <td  class="hidden-xs">0 | Bad effort!</td>
-              <td  class="hidden-xs"><a mailto="luisa@company.com">Luisa Fuentes</a></td>
-            </tr>
-            <tr>
-              <th scope=row  class="hidden-xs">4</th>
-              <td><a href=""><span class="glyphicon glyphicon-book hidden-xs"></span> Biology 1</a></td>
-              <td class="hidden-xs">D4 | 1:00pm - 2:35pm</td>
-              <td class="hidden-sm hidden-md hidden-lg">D4|~ 1-2Pm</td>
-              <td  class="hidden-xs">5 | Bad actitude!</td>
-              <td  class="hidden-xs"><a mailto="melisa@company.com">Melisa Garcia</a></td>
-            </tr>
-            <tr>
-              <th scope=row  class="hidden-xs">5</th>
-              <td><a href=""><span class="glyphicon glyphicon-book hidden-xs"></span> Math level 2</a></td>
-              <td class="hidden-xs">D4 | 2:45pm - 3:45pm</td>
-              <td class="hidden-sm hidden-md hidden-lg">D4|~ 2-4Pm</td>
-              <td  class="hidden-xs">2 | Good effort!</td>
-              <td  class="hidden-xs"><a mailto="jorge@company.com">Jorge Martinez</a></td>
+              <td><a href=""><span class="glyphicon glyphicon-book hidden-xs"></span> {{enrollment.CourseTitle}}</a></td>
+              <td class="hidden-xs">{{enrollment.room}} | {{enrollment.time}}</td>
+              <td class="hidden-sm hidden-md hidden-lg">{{enrollment.room}}|{{enrollment.time}}</td>
+              <td  class="hidden-xs">{{enrollment.absences}} | {{enrollment.comments}}</td>
+              <td  class="hidden-xs"><a mailto="">{{enrollment.TeacherFirst}} {{enrollment.TeacherLast}}</a></td>
             </tr>
           </tbody>
         </table>

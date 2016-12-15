@@ -32,13 +32,20 @@ exports.findById = (payload, err, success) => {
   }).then(success).catch(err);
 };
 
-exports.findByIdWithFullInfo = (payload, err, success) => {
-  db.sequelize.query("SELECT * FROM users WHERE username = :username",
+exports.findByIdFullInfo = (payload, err, success) => {
+  db.sequelize.query(
+    "SELECT u.*, st.gradeLevel, sc.[name] AS mainLocationName, sc.addressLine1 AS mainLocationAddressLine1,	sc.addressLine2 AS mainLocationAddressLine2, sc.city AS mainLocationCity, sc.[state] AS mainLocationState, sc.zipCode AS mainLocationZipCode, sc.phone AS mainLocationPhone FROM students st INNER JOIN users u ON st.username = u.username LEFT JOIN schools sc ON u.MainLocationNumber = sc.schoolNumber WHERE st.username = :username",
     { replacements: { username: payload.id }, type: db.sequelize.QueryTypes.SELECT }
   )
     .then(success).catch(err);
 };
-
+exports.getEnrollments = (payload, err, success) => {
+  db.sequelize.query(
+    "SELECT en.* , co.courseId, co.title AS CourseTitle, u.first AS TeacherFirst, u.last AS TeacherLast FROM enrollments en LEFT JOIN courses co ON en.courseId = co.courseId LEFT JOIN teachers te ON en.teacherId = te.username LEFT JOIN users u ON en.teacherId = u.username WHERE en.studentId = :username",
+    { replacements: { username: payload.id }, type: db.sequelize.QueryTypes.SELECT }
+  )
+    .then(success).catch(err);
+};
 // insert new, needs to resolve fact that info is in user and sutdent table
 exports.create = (payload, err, success) => {
   db.student.create(payload).then(success).catch(err);

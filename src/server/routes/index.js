@@ -25,14 +25,13 @@ module.exports = (express, jwt) => {
           } else {
               res.status(401).send("Access denied!");
           }
-
-
-
       });
   });
 
     // add API routes with prefix
   router.use('/api/v1', require('./api/student')(express, jwt));
+  router.use('/api/v1', require('./api/user')(express, jwt));
+  router.use('/api/v1', require('./api/enrollment')(express, jwt));
 
   return router;
 };

@@ -40,7 +40,7 @@ module.exports = (express, jwt) => {
               res.status(200).json(data);
             }
             if (fullInfo) {
-              student.findByIdWithFullInfo(req.params,error,success);
+              student.findByIdFullInfo(req.params,error,success);
             } else {
               student.findById(req.params,error,success);
             }
@@ -49,7 +49,26 @@ module.exports = (express, jwt) => {
             res.status(401).send(err);
         }
     });
-    //});
+
+    router.get("/students/:id/enrollments", (req, res) => {
+        var token = req.query.token;
+        var fullInfo = (req.query.fullInfo === "true");
+        //jwt.verify(token, secret, (err, decoded)=>{
+        if (1 === 1) { //authorized
+            function error(err) {
+              logger.log("error", "by id student read error:" + err.message + "\n");
+              res.status(500).send(err.message);
+            }
+            function success(data) {
+              logger.log("info", "by id student read:" + JSON.stringify(data) + "\n");
+              res.status(200).json(data);
+            }
+            student.getEnrollments(req.params,error,success);
+        } else { //unauthorized
+            res.status(401).send(err);
+        }
+    });
+
     // route: insert new student
     router.post("/students", (req, res) => {
         jwt.verify(token, secret, (err, decoded) => {

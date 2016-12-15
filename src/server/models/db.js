@@ -32,7 +32,8 @@ const user = sequelize.define('user', { // define user model
   last: Sequelize.STRING(30),
   dob: Sequelize.DATE,
   email: Sequelize.STRING(100),
-  phone: Sequelize.STRING(10)
+  phone: Sequelize.STRING(10),
+  MainLocationNumber: Sequelize.STRING(4)
 },
 {
   tableName: 'users'
@@ -49,7 +50,7 @@ const user = sequelize.define('user', { // define user model
 
 const student = sequelize.define('student', { // define student model
   username: { type: Sequelize.STRING(10), primaryKey: true, references: { model: 'users', key: 'username' } },
-  gradeLevel: Sequelize.STRING(50)
+  gradeLevel: Sequelize.STRING(50),
 },
 {
   tableName: 'students'

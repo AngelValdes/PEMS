@@ -11,6 +11,13 @@ exports.authenticate = (payload, err, success) => {
     ]
   }).then(success).catch(err);
 };
+exports.getAddresses = (payload, err, success) => {
+  db.sequelize.query(
+    "SELECT * FROM Addresses WHERE ownerid = :username",
+    { replacements: { username: payload.id }, type: db.sequelize.QueryTypes.SELECT }
+  )
+    .then(success).catch(err);
+};
 exports.findAll = (err, success) => {
   db.user.findAll({ include: [{ all: true, nested: true }]}).then(success).catch(err);
 };
